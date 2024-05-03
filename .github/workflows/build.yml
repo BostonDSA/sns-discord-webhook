@@ -1,0 +1,19 @@
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu:latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build
+        run: |
+          pip install pipenv
+          pipenv requirements > requirements.txt
+          mkdir dist
+          pip install -r requirements.txt -t dist
+          find dist -name __pycache__ | xargs rm -rf
+          cp lambda_function.py dist
+          zip -9r lambda.zip dist
