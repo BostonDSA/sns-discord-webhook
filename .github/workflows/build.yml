@@ -16,8 +16,10 @@ jobs:
           pip install -r requirements.txt -t dist
           find dist -name __pycache__ | xargs rm -rf
           cp lambda_function.py dist
+          cd dist
+          zip -9r ../sns-discord-webhook.zip .
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: sns-discord-webhook
-          path: dist
+          path: sns-discord-webhook.zip
