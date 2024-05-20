@@ -1,5 +1,4 @@
 import os
-import sys
 from discord_webhook import DiscordWebhook
 
 def lambda_handler(event, context):
